@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "core",
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
@@ -76,9 +77,13 @@ WSGI_APPLICATION = "BanaoAssignment.wsgi.application"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',  # Use MySQL backend
+        'NAME': 'assignment',  # Your MySQL database name
+        'USER': 'root',  # Your MySQL username
+        'PASSWORD': 'root',  # Your MySQL password
+        'HOST': 'localhost',  # Usually 'localhost' if you're running MySQL locally
+        'PORT': '3306',  # Default MySQL port
     }
 }
 
@@ -121,7 +126,30 @@ STATIC_URL = "static/"
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+CKEDITOR_UPLOAD_PATH = "uploads/ckeditor/"
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'height': 300,
+        'width': 'auto',
+        'toolbar_Custom': [
+            ['Bold', 'Italic', 'Underline'],
+            ['FontSize', 'Font', 'TextColor'],
+            ['Link', 'Unlink', 'Anchor'],
+            ['Smiley', 'SpecialChar'],
+            ['BulletedList', 'NumberedList', 'Outdent', 'Indent'],
+            ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+            ['Image', 'Table', 'HorizontalRule'],
+            ['Maximize'],
+        ],
+        'removePlugins': 'stylesheetparser',
+
+    }
+
+}
